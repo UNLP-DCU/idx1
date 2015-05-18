@@ -1,0 +1,140 @@
+@font-face {
+    font-family: 'montserratregular';
+    src: url('http://www.worksmedical.com/site/wp-content/themes/works/font/montserrat-regular-webfont.eot');
+    src: url('http://www.worksmedical.com/site/wp-content/themes/works/font/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://www.worksmedical.com/site/wp-content/themes/works/font/montserrat-regular-webfont.woff') format('woff'),
+         url('http://www.worksmedical.com/site/wp-content/themes/works/font/montserrat-regular-webfont.ttf') format('truetype'),
+         url('http://www.worksmedical.com/site/wp-content/themes/works/font/montserrat-regular-webfont.svg#montserratregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@media screen and (max-width: 500px) {
+    
+
+	header h1{
+	font-size: 40px;
+	}
+	#block-supertitle{
+		display: none;
+	}
+
+}
+
+
+#main-content {
+		width: 98%;
+		position: relative;
+		margin: 0 auto;
+}
+
+section#menue {
+		width: 25%;
+		min-width: 400px;
+		float: left;
+		position:static;
+		height: 100%;
+		background-color: #41ABCE;
+}
+
+section#files {
+		width: 70%;
+		min-width: 400px;
+		float: right;
+		position:static;
+		background-color: #41ABCE;
+}
+
+footer h1{color:#fff;}
+
+
+#block-supertitle {
+		color: var(--primary-2-0);
+		font-size: 14px;
+		text-shadow: 0 -1px 0 #000;
+		width: 90%;
+		text-align: center;
+		position: relative;
+		margin: 0 auto;
+		padding: 3.1% 0px 0 0;
+}
+
+#block-title {
+		text-align: center;
+		width: 90%;
+		position: relative;
+		margin: 0 auto;
+		padding: 20px 0px 0.7% 0;
+		
+}
+
+
+.box{
+	display: inline-block;
+	color:#FFF;
+	width: 30%;
+	height: width;
+	min-width: 400px;
+	min-height:  400px;
+	position: relative;
+	float: right;
+	background-color:#FFF;
+	overflow:hidden;
+	text-align:center;
+
+}
+
+.directory{
+	color:#FFF;
+	width: 100%;
+	height: width;
+	min-width: 100px;
+	min-height:  50px;
+	position: static;
+	float: none;
+	margin: 1% 0% 1% 0%;
+	padding: 2% 0% 1% 0%;
+	background-color:#F17B73;
+	text-align:center;
+
+}
+
+
+
+
+.message.box{background-color:#EDC34F;}
+.picture.box{background-color:#7DCDC8;}
+.file.box{background-color:#B690BC;}
+.document.box{background-color:#F17B73;}
+
+
+.box message{background-image: url("http://www.worksmedical.com/site/wp-content/themes/works/images/mail_home.png");}
+
+
+#block-supertitle span.supertitle-sub {
+		color: #FFF;
+		font-size: 12px;
+		text-shadow: 0 -1px 0 #000;
+		padding-left: 6px;
+}
+
+header h1 {
+		color:#FFF;
+		font-family:montserratregular;
+}
+
+
+section#menue h3 {
+		color: #8F6F00;
+}
+
+section#menue p {
+		margin-bottom: 15px;
+		color: #B0B0B0;
+}
+
+section#menue section.files p {
+		font-size: 20px;
+		line-height: 28px;
+}
