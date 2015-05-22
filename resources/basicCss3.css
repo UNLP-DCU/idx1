@@ -1,0 +1,95 @@
+body {	
+	margin: 0;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #FF8300;
+	background-color: #067CA4;
+	}
+
+
+section#files{
+	background-color: #41ABCE;
+	position: relative;
+}
+
+.box{
+	color:#FFF;
+	background-color:#FFF;
+	text-align:center;
+
+
+}
+
+section#files {
+	background-color: #41ABCE;
+	position:relative;
+}
+
+
+h1 {
+	text-align: center;text-shadow: 0 0.2px 0 #FFF;
+	margin: 0 auto;
+}
+
+.name{text-align: center; padding-top: 80px; width: 95%;overflow: hidden; max-height: 10;font-size: 20px;}
+.message.box{background: url(mail_home.png) center top no-repeat #EDC34F;}
+.picture.box{background: url(photogallery_home.png) center top no-repeat #7DCDC8;}
+.file.box{background: url(corsi_home.png) center top no-repeat #B690BC;}
+.folder.box{background: url(folder-256.png) center top no-repeat #B9B69F ;}
+.document.box{background: url(attivita_home.png) center top no-repeat #F17B73;}
+.home.box{background: url(azienda_home.png) center top no-repeat #57C57B ;}
+
+
+
+@import url("reset.css");
+	/* New HTML5 elements */
+	article, aside, figure,  hgroup, nav, section { 
+		display:block; 
+	}
+	/* -------- */
+
+
+@media screen and (min-width: 110px) {
+	.box{
+    border: 2% 2% 2% 2%;
+    margin: 1% 1% 1% 1%;
+	width: 31.33%;
+	height: 200px;
+	float: left;
+	position: inherit;
+	}
+
+	section#files {
+		margin: 2% 2% 2% 2%;
+		height: 97%;
+		float: inherit;
+	}
+
+	h1 {font-size: 54px;
+		height: 60px;
+	}
+}
+
+@media  screen and (min-width: 1000px) {
+	.box{max-width: 300px;
+		margin: 12px 12px 12px 12px;}
+	section#files {
+		margin: 12px 12px 12px 12px;
+		height: 97%;
+		float: inherit;
+	}
+}
+#loading {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	font-size: 30px;
+	color:#EFC242;
+	text-align: center;
+	background: url(Preloader_7.gif) center no-repeat #fff;
+	padding-top: 10%;
+	background-color:#585D63;
+	
+}
