@@ -5,8 +5,6 @@ var parser = (function () {
    var jsonArray = JSON.parse(input);	
 
 
-
-  //Función que devuelve los objetos de un arreglo JSON en un arreglo js, en orden normal o inverso dependiendo de cond
   dameObjetosPrivate = function(cond){
 	var resultado = new Array();
 	jsonArray.forEach(function(object) {
@@ -16,56 +14,87 @@ var parser = (function () {
 	else return resultado.reverse();
   }
 
-  //Funcion que devuelve el objeto JSON que cumple que una propiedad determinada tiene un valor determinado, suponiendo que tal clave es única
   dameObjetoPrivate = function(identificador,valor){
 
 	var objeto;
 	jsonArray.forEach(function(object) {
-		if(object[identificador] == valor){
+		if(object[identificador] == valor)
 			objeto=object; 
-		}
 	});
 	return objeto;
   }
 
-  //Función que devuelve todas las propiedades del objeto JSON junto con sus valores
   damePropiedadesPrivate = function(objeto){
-
 		var resultado = {};
 		for (var prop in objeto) 
 		    resultado[prop] = objeto[prop];
 		return resultado;
-	}
-	
-  dameTipoPrivate = function(objeto){
-	
   }
+
+  dameSubElementosPrivate = function(objeto){
+		var resultado = new Array();
+		for (var prop in objeto) 
+		    resultado.push(objeto[prop]);
+		return resultado;
+  }
+
+  dameSubDirectoriosPrivate = function(objeto){
+		var resultado = new Array();
+		for (var prop in objeto){
+			if( (typeof objeto[prop]).toLowerCase() == "object")
+				 resultado.push(objeto[prop]);
+		}
+		return resultado;
+  }
+
 
   //PARTE PÚBLICA
   return {
+
+  	//Función que devuelve los objetos de un arreglo JSON en un arreglo js, en orden normal
     dameObjetos: function( ) {
       return dameObjetosPrivate(true);
     },
 
+    //Función que devuelve los objetos de un arreglo JSON en un arreglo js, en orden inverso
     dameObjetosReverse: function( ) {
       return dameObjetosPrivate(false);
     },
 
+    //Funcion que devuelve el objeto JSON que cumple que una propiedad determinada tiene un valor determinado, suponiendo que tal clave es única
     dameObjeto: function(id,valor){
     	return dameObjetoPrivate(id,valor);
     },
 
+    //Función que devuelve el valor de nomPropiedad del objeto
+    damePropiedad: function(nomPropiedad, objeto){
+    	return objeto[nomPropiedad];
+    },
+
+    //Función que devuelve todas las propiedades del objeto JSON en un arreglo
     damePropiedades: function (objeto){
     	return damePropiedadesPrivate(objeto);
     },
+
+    //Función que devuelve todos los subelementos de un objeto en un arreglo, sean estos directorios o tipos de dato primitivo, como strings, int, etc.
+    dameSubElementos: function (objeto){
+    	return dameSubElementosPrivate(objeto);
+    },
+
+    //Función que devuelve todos los subdirectorios de un objeto (se considera directorio al objeto y no al tipo de dato primitivo) en un arreglo
+    dameSubDirectorios: function (objeto){
+    	return dameSubDirectoriosPrivate(objeto);
+    },
 	
-	dameTipo: function (objeto){
-		return typeof objeto;
-	},
-	
-	prueba: function (){
-		alert ("Probando llamado de funciones del parser desde el html");
-	}
+  	//Función que devuelve el tipo de un objeto
+  	dameTipo: function (objeto){
+  		return typeof objeto;
+  	},
+  	
+  	//Función de prueba, se muestra su invocación desde un html
+  	prueba: function (){
+  		alert ("Probando llamado de funciones del parser desde el html");
+  	}
 
    };
 
@@ -92,14 +121,22 @@ var parser = (function () {
  var objeto = parser.dameObjeto("name","index.html");
  //PRUEBA DE DAME OBJETO
  //alert("Objeto recuperado: ".concat("Name: ",objeto.name, ", Path: ",objeto.path,", Size: ", objeto.size));
+ //PRUEBA DE DAME PROPIEDAD
+ //alert(parser.damePropiedad("size",objeto));
+ var subElementos = parser.dameSubElementos(objeto);
+ //PRUEBA DE SUBELEMENTOS
+ //alert("El objeto de nombre "+parser.damePropiedad("name",objeto)+" posee "+subElementos.length+" subelementos.");
 
+ var subDirectorios = parser.dameSubDirectorios(objeto);
+ //PRUEBA DE SUBDIRECTORIOS
+ //alert("El objeto de nombre "+parser.damePropiedad("name",objeto)+" posee "+subDirectorios.length+" subdirectorios.");
 
  var propiedades = parser.damePropiedades(objeto);
  //PRUEBA DE DAME PROPIEDADES
- /*imprimir="";
+ /*imprimir="Propiedades del objeto: ";
  for (var prop in propiedades) 
-		    imprimir = imprimir.concat(prop,":",objeto[prop],",");
- alert(imprimir);*/
+		    imprimir = imprimir.concat(prop,",");
+ alert(imprimir);/*
 
  
  //PRUEBA DE DAME TIPO
