@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Ejemplo Gyro.js</title>
+</head>
+
+<body>
+<h2>Ejemplo Gyro.js</h2>
+<p>Probar en el navegador de un dispositivo movil y probar girando el dispositivo.</p>
+<h3>Estos son los valores que arroja:</h3>
+<h4>Acelerometro</h4>
+<div>
+	<span>X: </span>
+	<span id="x"></span>
+</div>
+<div>
+	<span>Y: </span>
+	<span id="y"></span>
+</div>
+<div>
+	<span>Z: </span>
+	<span id="z"></span>
+</div>
+<h4>Giroscopio</h4>
+<div>
+	<span>Alpha: </span>
+	<span id="alpha"></span>
+</div>
+<div>
+	<span>Beta: </span>
+	<span id="beta"></span>
+</div>
+<div>
+	<span>Gamma: </span>
+	<span id="gamma"></span>
+</div>
+<div style="margin: 20px;">
+	<img id="imagenDispositivo" src="">
+</div>
+</body>
+<script src="gyro/js/gyro.js"></script>
+<script>
+	var estado = "ninguno";
+    gyro.startTracking(function(o) {
+        gyro.startTracking(function(o) {
+			document.getElementById('x').innerHTML = o.x;
+			document.getElementById('y').innerHTML = o.y;
+			document.getElementById('z').innerHTML = o.z;
+			document.getElementById('alpha').innerHTML = o.alpha;
+			document.getElementById('beta').innerHTML = o.beta;
+			document.getElementById('gamma').innerHTML = o.gamma;
+			if((o.gamma<-50)&&(estado != "horizontal-izq")){
+				//Llamar al modulo de vista y mostrar version horizontal
+				horizontalIzquierda();
+				estado = "horizontal-izq";
+			}
+			if((o.gamma>50)&&(estado != "horizontal-der")){
+				//Llamar al modulo de vista y mostrar version horizontal
+				horizontalDerecha();
+				estado = "horizontal-der";
+			}
+			if((o.gamma<50)&&(o.gamma>-50)&&(estado != "vertical")){
+				//Llamar al modulo de vista y mostrar version vertical
+				verticalArriba();
+				estado = "vertical";
+			}
+			
+		});
+    });
+	
+	function verticalArriba(){
+		document.getElementById('imagenDispositivo').src="vertical-arriba.jpg";
+	}
+	function horizontalIzquierda(){
+		document.getElementById('imagenDispositivo').src="horizontal-izq.jpg";
+	}
+	function horizontalDerecha(){
+		document.getElementById('imagenDispositivo').src="horizontal-der.jpg";
+	}
+</script>
+</html>

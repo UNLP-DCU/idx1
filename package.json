@@ -1,0 +1,26 @@
+{
+  "name": "idx1",
+  "version": "1.0.0",
+  "description": "Repositorio del prototipo en diseño de interacción y navegación de filesystem.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UNLP-DCU/idx1.git"
+  },
+  "keywords": [
+    "dcu",
+    "hci",
+    "interaction",
+    "research",
+    "unlp"
+  ],
+  "author": "DCU 2015",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UNLP-DCU/idx1/issues"
+  },
+  "homepage": "https://github.com/UNLP-DCU/idx1"
+}
