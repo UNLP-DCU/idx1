@@ -42,6 +42,15 @@
 </body>
 <script src="gyro/js/gyro.js"></script>
 <script>
+	function sleep(milliseconds) {
+	  var start = new Date().getTime();
+	  for (var i = 0; i < 1e7; i++) {
+		if ((new Date().getTime() - start) > milliseconds){
+		  break;
+		}
+	  }
+	}
+
 	var estado = "ninguno";
     gyro.startTracking(function(o) {
         gyro.startTracking(function(o) {
@@ -66,6 +75,15 @@
 				verticalArriba();
 				estado = "vertical";
 			}
+			
+			if(o.x < -11){
+				alert("Gesto izquierda");
+			}
+			
+			if(o.x > 11){
+				alert("Gesto derecha");
+			}
+			
 			
 		});
     });

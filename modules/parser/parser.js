@@ -1,147 +1,146 @@
-/************************* *********************************/
-/************************* *********************************/
-/************************* *********************************/
-/** FUNCIONES RELATIVAS A LA VISTA **/
+var parser = (function () {
 
-//Función invocada al cargar el body, que vuelca en el los objetos/directorios del JSON
-function cargaDirectoriosEn(contenedor,idElementoJson) {
-		var jsonArray = jsonComoArray(idElementoJson);
-
-		var objetos = dameObjetosDe(jsonArray);
-
-		var container = document.getElementById(contenedor);
-		borrarleContenido(container);
-		
-
-		objetos.forEach(function(objeto,i) {
-			var divisor = document.createElement('div');
-
-			var directorio = document.createElement('a');
-			var linkText = document.createTextNode("Ver Detalles");
-			directorio.appendChild(linkText);
-
-			//aquí deberia pasar el objeto, el contenedor y el archivo json parseado como objetos y no como texto, pero tira error "unexpected identifier"
-			directorio.href = "javascript:mostrarPropiedadesEn("+i+",\""+contenedor+"\",\""+idElementoJson+"\")";
-
-			divisor.innerHTML = "Elemento "+(i+1)+" ";
-			divisor.appendChild(directorio);
-
-			//directorio.innerHTML = "Elemento " + (i+1) + ". <a href='javascript:mostrarPropiedadesEn("+i+",\""+contenedor+"\",\""+idElementoJson+"\")'> Ver detalles</a>";
-			container.appendChild(divisor);    			
-		});
-}
-
-/**DEBERIA HACER EL IDELEMENTOJSON UNA VARIABLE GLOBAL **/
-/**EN VEZ DE NUMERO OBJ, DEBERIA SER EL OBJETO EN SI EL PARAMETRO **/
-function mostrarPropiedadesEn(numeroObj,contenedor,idElementoJson){
-
-	var jsonArray = jsonComoArray(idElementoJson);
-
-	var objeto = dameObjeto(numeroObj,jsonArray);
-
-	var container = document.getElementById(contenedor);  /**esto no deberia hacerse, deberia recibir ya el objeto contenedor como en los siguientes**/
-
-	var propiedades = damePropiedades(objeto);
-	agregarPropiedadesA(numeroObj,container,propiedades,idElementoJson);
-
-	var volverA = document.createElement("div");
-	
-	volverA.innerHTML = "<a href='javascript:cargaDirectoriosEn(\""+contenedor+"\",\""+idElementoJson+"\")'>Volver</a>";
-	container.appendChild(volverA);
-}
-
-function agregarPropiedadesA(numeroObj,contenedor,propiedades,idElementoJson){
-	borrarleContenido(contenedor);
-	
-	for (var prop in propiedades)
-	{
-		var propiedad = document.createElement("div");
-		if ( (Object.prototype.toString.call(propiedades[prop])) == "[object Object]"){
-			propiedad.innerHTML =prop + ": "+ "<a href='javascript:mostrarPropiedadesEn("+numeroObj+",\""+contenedor+"\",\""+idElementoJson+"\")'> Ver detalles (aun no anda)</a>";
-			
-
-		} else propiedad.innerHTML = prop + ": "+propiedades[prop] + ". <a href='javascript:cambiarPorHola("+numeroObj+",\""+prop+"\",\""+idElementoJson+"\")'> Cambiar "+prop+" por algo (aun no anda)</a>";
-		contenedor.appendChild(propiedad);
-	}
-}
-
-function borrarleContenido(contenedor){
-	while (contenedor.hasChildNodes()) {
-   	 contenedor.removeChild(contenedor.lastChild);
-	}
-}
-/************************* *********************************/
-/************************* *********************************/
-/************************* *********************************/
-/** FUNCIONES RELATIVAS A OBJETOS JS **/
-
-//Convierte un Json en un arreglo JS
-function jsonComoArray(idElementoJson){
-	var text = document.getElementById(idElementoJson).text;
-	var array = JSON.parse(text);
-	return array;
-}
+   //PARTE PRIVADA
+   var input = '[{"name": "index.html","path": "index.html","sha": "b1436f37573ce7fa17417f9a3859f3d149eca041","size": 5961,"url": "https://api.github.com/repos/vox-pop/organizacion/contents/index.html?ref=gh-pages","html_url": "https://github.com/vox-pop/organizacion/blob/gh-pages/index.html","git_url": "https://api.github.com/repos/vox-pop/organizacion/git/blobs/b1436f37573ce7fa17417f9a3859f3d149eca041","download_url": "https://raw.githubusercontent.com/vox-pop/organizacion/gh-pages/index.html","type": "file","_links": {"self": "https://api.github.com/repos/vox-pop/organizacion/contents/index.html?ref=gh-pages","git": "https://api.github.com/repos/vox-pop/organizacion/git/blobs/b1436f37573ce7fa17417f9a3859f3d149eca041","html": "https://github.com/vox-pop/organizacion/blob/gh-pages/index.html"}},{"name": "layout.html","path": "layout.html","sha": "4811ae40fe8bdd38ff1361fc8904a128d27073e6","size": 4794,"url": "https://api.github.com/repos/vox-pop/organizacion/contents/layout.html?ref=gh-pages","html_url": "https://github.com/vox-pop/organizacion/blob/gh-pages/layout.html","git_url": "https://api.github.com/repos/vox-pop/organizacion/git/blobs/4811ae40fe8bdd38ff1361fc8904a128d27073e6","download_url": "https://raw.githubusercontent.com/vox-pop/organizacion/gh-pages/layout.html","type": "file","_links": {"self": "https://api.github.com/repos/vox-pop/organizacion/contents/layout.html?ref=gh-pages","git": "https://api.github.com/repos/vox-pop/organizacion/git/blobs/4811ae40fe8bdd38ff1361fc8904a128d27073e6","html": "https://github.com/vox-pop/organizacion/blob/gh-pages/layout.html"}},{"name": "public","path": "public","sha": "367dec6d0328c3d444919e8e7aa6176c347f8a43","size": 0,"url": "https://api.github.com/repos/vox-pop/organizacion/contents/public?ref=gh-pages","html_url": "https://github.com/vox-pop/organizacion/tree/gh-pages/public","git_url": "https://api.github.com/repos/vox-pop/organizacion/git/trees/367dec6d0328c3d444919e8e7aa6176c347f8a43","download_url": null,"type": "dir","_links": {"self": "https://api.github.com/repos/vox-pop/organizacion/contents/public?ref=gh-pages","git": "https://api.github.com/repos/vox-pop/organizacion/git/trees/367dec6d0328c3d444919e8e7aa6176c347f8a43","html": "https://github.com/vox-pop/organizacion/tree/gh-pages/public"}},{"name": "site","path": "site","sha": "e99e01e4ca89a3a2cb80c24260f865232c9fddba","size": 885,"url": "https://api.github.com/repos/vox-pop/organizacion/contents/site?ref=gh-pages","html_url": "https://github.com/vox-pop/organizacion/blob/gh-pages/site","git_url": "https://api.github.com/repos/vox-pop/organizacion/git/blobs/e99e01e4ca89a3a2cb80c24260f865232c9fddba","download_url": "https://raw.githubusercontent.com/vox-pop/organizacion/gh-pages/site","type": "file","_links": {"self": "https://api.github.com/repos/vox-pop/organizacion/contents/site?ref=gh-pages","git": "https://api.github.com/repos/vox-pop/organizacion/git/blobs/e99e01e4ca89a3a2cb80c24260f865232c9fddba","html": "https://github.com/vox-pop/organizacion/blob/gh-pages/site"}}]';
+   var jsonArray = JSON.parse(input);	
 
 
-//Función que devuelve los objetos de un arreglo JSON en js
-function dameObjetosDe(jsonArray){
+  dameObjetosPrivate = function(cond){
 	var resultado = new Array();
 	jsonArray.forEach(function(object) {
-			resultado.push(object);   			
+			resultado.push(object);   		
 	});
-	return resultado;
-}
+	if(cond) return resultado.sort();
+	else return resultado.reverse();
+  }
 
-//Funcion que devuelve el objeto JSON que cumple que una propiedad determinada tiene un valor determinado, suponiendo que tal clave es única
- function dameObjeto(identificador,valor,jsonArray){
+  dameObjetoPrivate = function(identificador,valor){
 
 	var objeto;
-
 	jsonArray.forEach(function(object) {
-		if(object[identificador] == valor){
+		if(object[identificador] == valor)
 			objeto=object; 
+	});
+	return objeto;
+  }
+
+  damePropiedadesPrivate = function(objeto){
+		var resultado = {};
+		for (var prop in objeto) 
+		    resultado[prop] = objeto[prop];
+		return resultado;
+  }
+
+  dameSubElementosPrivate = function(objeto){
+		var resultado = new Array();
+		for (var prop in objeto) 
+		    resultado.push(objeto[prop]);
+		return resultado;
+  }
+
+  dameSubDirectoriosPrivate = function(objeto){
+		var resultado = new Array();
+		for (var prop in objeto){
+			if( (typeof objeto[prop]).toLowerCase() == "object")
+				 resultado.push(objeto[prop]);
 		}
-	});
-
-	return objeto;
- }
-
- //Funcion que devuelve el objeto numero "numero" del JSON 
- function dameObjeto(numero,jsonArray){
-	var objeto;
-
-	var aux=0;
-	jsonArray.forEach(function(object) {
-		if(aux==numero){
-			objeto=object; 
-		} 
-		aux=aux+1;
-	});
-
-	return objeto;
- }
-
-//Función que devuelve todas las propiedades del objeto JSON junto con sus valores
-function damePropiedades(objeto){
-
-	var resultado = {};
-
-	for (var prop in objeto) 
-	    resultado[prop] = objeto[prop];
-
-	return resultado;
-}
+		return resultado;
+  }
 
 
-//funcion para ir probando cambiar una propiedad de un objeto JSON, aún no anda igualmente
-function cambiarPorHola(numeroObj,propiedad,idElementoJson){
-	var jsonArray = jsonComoArray(idElementoJson);
-	var objeto = dameObjeto(numeroObj,jsonArray);
-	alert("Cambiare "+objeto[propiedad]+" por Hola");
-	objeto[propiedad]="Hola";
-	//especie de refresh
-	mostrarPropiedadesEn(numeroObj,'contenedor',idElementoJson);
-}
+  //PARTE PÚBLICA
+  return {
+
+  	//Función que devuelve los objetos de un arreglo JSON en un arreglo js, en orden normal
+    dameObjetos: function( ) {
+      return dameObjetosPrivate(true);
+    },
+
+    //Función que devuelve los objetos de un arreglo JSON en un arreglo js, en orden inverso
+    dameObjetosReverse: function( ) {
+      return dameObjetosPrivate(false);
+    },
+
+    //Funcion que devuelve el objeto JSON que cumple que una propiedad determinada tiene un valor determinado, suponiendo que tal clave es única
+    dameObjeto: function(id,valor){
+    	return dameObjetoPrivate(id,valor);
+    },
+
+    //Función que devuelve el valor de nomPropiedad del objeto
+    damePropiedad: function(nomPropiedad, objeto){
+    	return objeto[nomPropiedad];
+    },
+
+    //Función que devuelve todas las propiedades del objeto JSON en un arreglo
+    damePropiedades: function (objeto){
+    	return damePropiedadesPrivate(objeto);
+    },
+
+    //Función que devuelve todos los subelementos de un objeto en un arreglo, sean estos directorios o tipos de dato primitivo, como strings, int, etc.
+    dameSubElementos: function (objeto){
+    	return dameSubElementosPrivate(objeto);
+    },
+
+    //Función que devuelve todos los subdirectorios de un objeto (se considera directorio al objeto y no al tipo de dato primitivo) en un arreglo
+    dameSubDirectorios: function (objeto){
+    	return dameSubDirectoriosPrivate(objeto);
+    },
+	
+  	//Función que devuelve el tipo de un objeto
+  	dameTipo: function (objeto){
+  		return typeof objeto;
+  	},
+  	
+  	//Función de prueba, se muestra su invocación desde un html
+  	prueba: function (){
+  		alert ("Probando llamado de funciones del parser desde el html");
+  	}
+
+   };
 
 
+})();
 
+ var objetos = parser.dameObjetos();
+ var imprimir="";
+ //PRUEBA DE DAME OBJETOS
+ /*imprimir="Objetos al derecho: ";
+ objetos.forEach(function(objeto,i) {
+ 			imprimir = imprimir.concat(i,") ",objeto.name);		
+ });
+ alert(imprimir);*/
+
+ objetos = parser.dameObjetosReverse();
+ //PRUEBA DE DAME OBJETOS REVERSE
+ /*imprimir="Objetos al reves: ";
+ objetos.forEach(function(objeto,i) {
+ 			imprimir = imprimir.concat(i,") ",objeto.name);
+ });
+ alert(imprimir);*/
+ 
+ var objeto = parser.dameObjeto("name","index.html");
+ //PRUEBA DE DAME OBJETO
+ //alert("Objeto recuperado: ".concat("Name: ",objeto.name, ", Path: ",objeto.path,", Size: ", objeto.size));
+ //PRUEBA DE DAME PROPIEDAD
+ //alert(parser.damePropiedad("size",objeto));
+ var subElementos = parser.dameSubElementos(objeto);
+ //PRUEBA DE SUBELEMENTOS
+ //alert("El objeto de nombre "+parser.damePropiedad("name",objeto)+" posee "+subElementos.length+" subelementos.");
+
+ var subDirectorios = parser.dameSubDirectorios(objeto);
+ //PRUEBA DE SUBDIRECTORIOS
+ //alert("El objeto de nombre "+parser.damePropiedad("name",objeto)+" posee "+subDirectorios.length+" subdirectorios.");
+
+ var propiedades = parser.damePropiedades(objeto);
+ //PRUEBA DE DAME PROPIEDADES
+ /*imprimir="Propiedades del objeto: ";
+ for (var prop in propiedades) 
+		    imprimir = imprimir.concat(prop,",");
+ alert(imprimir);/*
+
+ 
+ //PRUEBA DE DAME TIPO
+ /*imprimir="Obteniendo tipos del objeto con nombre: ".concat(objeto.name,": ");
+ for (var prop in objeto)
+		    imprimir = imprimir.concat(prop,": ",parser.dameTipo(objeto[prop]),"; ");
+ alert(imprimir);*/
