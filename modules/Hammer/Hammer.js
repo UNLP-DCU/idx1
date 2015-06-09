@@ -1,19 +1,26 @@
 //Obtener los archivos
-var archivos =  document.querySelector("archivos"); //preguntar bien
-
-
+var archivos =  document.querySelectorAll("archivos"); 
 //Obtener los directorios
-var directorios =  document.querySelector("directorios");
+var directorios =  document.querySelectorAll("directorios");
+//Obtener el div que contiene todo
+var contenedor = document.getElementoById("divContenedor");
 
+
+
+//Evento pellizcar cambia el orden de los elementos
+var pellizcar = new Hammer(contenedor);
+pellizcar.on("pinch", function(ev) {
+    //llamar a la funcion que visualiza archivos
+});
 
 
 //Evento dos dedos hacia izquierda, vuelve un directorio atras (habria que hacerlo sobre el "div" contenedor de los dir y arc.)
-var tap1 = new Hammer.Tap(divArcDir); // Aca tendria que decirle donde escuchar el evento?
+var tap1 = new Hammer.Tap(contenedor); // Aca tendria que decirle donde escuchar el evento?
 var tap2 = new Hammer.Tap();
 tap1.recognizeWith(tap2);
 //Otra posible solucion
-var el = document.querySelector("#directorios");
-var mc = new Hammer.Manager(el);
+
+var mc = new Hammer.Manager(contenedor);
 mc.add(new Hammer.Pan());
 mc.add(new Hammer.Pan().recognizeWith(mc.get('pan'));
 mc.on("acaNoSeQueEventoVa", irDirectorioAnterior );
