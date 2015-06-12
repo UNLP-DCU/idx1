@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Ejemplo Gyro.js</title>
+</head>
+
+<body>
+<h2>Ejemplo Gyro.js</h2>
+<p>Probar en el navegador de un dispositivo movil y probar girando el dispositivo.</p>
+<h3>Estos son los valores que arroja:</h3>
+<input style="width: 200px; height: 100px;" type="button" value="Start" onclick="activarCaptura()">
+<input style="width: 200px; height: 100px;" type="button" value="Stop" onclick="desactivarCaptura()">
+<input style="width: 200px; height: 100px;" type="button" value="Clear" onclick="limpiar()">
+<h4>Acelerometro</h4>
+<div id="acelerometro"></div>
+
+</body>
+<script src="gyro/js/gyro.js"></script>
+<script>
+	var estado = "ninguno";
+	var x;
+	var y;
+	var z;
+	var capturando = false;
+    gyro.startTracking(function(o) {
+        gyro.startTracking(function(o) {
+			x = o.x;
+			y = o.y;
+			z = o.z;
+			if(capturando){
+				var nuevo = '<div><span>X: '+ x +'</span></div><div><span>Y: '+ y +'</span></div><div><span>Z: '+ z +'</span></div>';
+				html = document.getElementById("acelerometro");
+				html.innerHTML = html.innerHTML + nuevo;
+			}
+		});
+    });
+	
+	function activarCaptura(){
+		capturando = true;
+	}
+	function desactivarCaptura(){
+		capturando = false;
+	}
+	function limpiar(){
+		document.getElementById("acelerometro").innerHTML = "";
+	}
+</script>
+</html>
