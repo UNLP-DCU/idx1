@@ -4,10 +4,11 @@
  * Este script se encarga de los eventos hapticos
  * manejados con la libreria Hammer */
 
-var myElement = document.getElementById('main-content');
+//obtiene el div main-content
+var dvContent = document.getElementById('main-content');
 
 // crea una instancia hammer
-var mc = new Hammer(myElement);
+var mc = new Hammer(dvContent);
 
 // Configurar reconocedores...
 mc.add( new Hammer.Pan({ threshold: 80 }) );
@@ -15,15 +16,14 @@ mc.add( new Hammer.Pan({ threshold: 80 }) );
 // Definiendo los eventos..
 /*--deslizado hacia derecha--*/
 mc.on("panright panleft", function(ev) {
-    //myElement.textContent = ev.type +" >>>>>>>>>>";
+  
     console.log( ev.type + "!");
      //metodo_cambiar();
 });
 
 /*--deslizado hacia izquierda--*/
-/*mc.on("panleft", function(ev) {
-    //myElement.textContent = ev.type +" <<<<<<<<<<<";
+mc.on("panleft", function(ev) {
     console.log("izquierda!");
     //metodo_cambiar();
-});*/
+});
 
