@@ -5,12 +5,12 @@ var parser = (function () {
    var jsonArray = JSON.parse(input);	
 
 
-  dameObjetosPrivate = function(cond){
+  dameObjetosPrivate = function(orden){
 	var resultado = new Array();
 	jsonArray.forEach(function(object) {
 			resultado.push(object);   		
 	});
-	if(cond) return resultado.sort();
+	if(orden) return resultado.sort();
 	else return resultado.reverse();
   }
 
@@ -24,18 +24,21 @@ var parser = (function () {
 	return objeto;
   }
 
-  damePropiedadesPrivate = function(objeto){
-		var resultado = {};
-		for (var prop in objeto) 
-		    resultado[prop] = objeto[prop];
-		return resultado;
+  damePropiedadesPrivate = function(objeto,orden){
+		var resultado = new Array();
+		for (var prop in objeto){
+      resultado.push(prop);
+    }
+		if(orden) return resultado.sort();
+    else return resultado.reverse();
   }
 
-  dameSubElementosPrivate = function(objeto){
+  dameSubElementosPrivate = function(objeto,orden){
 		var resultado = new Array();
 		for (var prop in objeto) 
 		    resultado.push(objeto[prop]);
-		return resultado;
+    if(orden) return resultado.sort();
+		else return resultado.reverse();
   }
 
   dameSubDirectoriosPrivate = function(objeto){
@@ -47,19 +50,20 @@ var parser = (function () {
 		return resultado;
   }
 
+  actualizarPrivate = function (objeto,propiedad,nuevo){
+    objeto[propiedad]=nuevo;
+    //return objeto;
+  }
+
 
   //PARTE PÚBLICA
   return {
 
-  	//Función que devuelve los objetos de un arreglo JSON en un arreglo js, en orden normal
-    dameObjetos: function( ) {
-      return dameObjetosPrivate(true);
+  	//Función que devuelve los objetos de un arreglo JSON en un arreglo js, en el orden especificado (normal si se manda true, al reverso en otro caso)
+    dameObjetos: function(orden) {
+      return dameObjetosPrivate(orden);
     },
 
-    //Función que devuelve los objetos de un arreglo JSON en un arreglo js, en orden inverso
-    dameObjetosReverse: function( ) {
-      return dameObjetosPrivate(false);
-    },
 
     //Funcion que devuelve el objeto JSON que cumple que una propiedad determinada tiene un valor determinado, suponiendo que tal clave es única
     dameObjeto: function(id,valor){
@@ -71,13 +75,14 @@ var parser = (function () {
     	return objeto[nomPropiedad];
     },
 
-    //Función que devuelve todas las propiedades del objeto JSON en un arreglo
-    damePropiedades: function (objeto){
-    	return damePropiedadesPrivate(objeto);
+    //Función que devuelve todas las propiedades del objeto JSON en un arreglo en el orden especificado (normal si se manda true, al reverso en otro caso)
+    damePropiedades: function (objeto,orden){
+    	return damePropiedadesPrivate(objeto,orden);
     },
 
-    //Función que devuelve todos los subelementos de un objeto en un arreglo, sean estos directorios o tipos de dato primitivo, como strings, int, etc.
-    dameSubElementos: function (objeto){
+    //Función que devuelve todos los subelementos de un objeto en un arreglo, sean estos directorios o tipos de dato primitivo, como strings, int, etc.,
+    //en el orden especificado (normal si se manda true, al reverso en otro caso)
+    dameSubElementos: function (objeto,orden){
     	return dameSubElementosPrivate(objeto);
     },
 
@@ -90,6 +95,10 @@ var parser = (function () {
   	dameTipo: function (objeto){
   		return typeof objeto;
   	},
+
+    actualizar: function(objeto,propiedad,nuevo){
+      return actualizarPrivate(objeto,propiedad,nuevo);
+    },
   	
   	//Función de prueba, se muestra su invocación desde un html
   	prueba: function (){
@@ -101,46 +110,3 @@ var parser = (function () {
 
 })();
 
- var objetos = parser.dameObjetos();
- var imprimir="";
- //PRUEBA DE DAME OBJETOS
- /*imprimir="Objetos al derecho: ";
- objetos.forEach(function(objeto,i) {
- 			imprimir = imprimir.concat(i,") ",objeto.name);		
- });
- alert(imprimir);*/
-
- objetos = parser.dameObjetosReverse();
- //PRUEBA DE DAME OBJETOS REVERSE
- /*imprimir="Objetos al reves: ";
- objetos.forEach(function(objeto,i) {
- 			imprimir = imprimir.concat(i,") ",objeto.name);
- });
- alert(imprimir);*/
- 
- var objeto = parser.dameObjeto("name","index.html");
- //PRUEBA DE DAME OBJETO
- //alert("Objeto recuperado: ".concat("Name: ",objeto.name, ", Path: ",objeto.path,", Size: ", objeto.size));
- //PRUEBA DE DAME PROPIEDAD
- //alert(parser.damePropiedad("size",objeto));
- var subElementos = parser.dameSubElementos(objeto);
- //PRUEBA DE SUBELEMENTOS
- //alert("El objeto de nombre "+parser.damePropiedad("name",objeto)+" posee "+subElementos.length+" subelementos.");
-
- var subDirectorios = parser.dameSubDirectorios(objeto);
- //PRUEBA DE SUBDIRECTORIOS
- //alert("El objeto de nombre "+parser.damePropiedad("name",objeto)+" posee "+subDirectorios.length+" subdirectorios.");
-
- var propiedades = parser.damePropiedades(objeto);
- //PRUEBA DE DAME PROPIEDADES
- /*imprimir="Propiedades del objeto: ";
- for (var prop in propiedades) 
-		    imprimir = imprimir.concat(prop,",");
- alert(imprimir);/*
-
- 
- //PRUEBA DE DAME TIPO
- /*imprimir="Obteniendo tipos del objeto con nombre: ".concat(objeto.name,": ");
- for (var prop in objeto)
-		    imprimir = imprimir.concat(prop,": ",parser.dameTipo(objeto[prop]),"; ");
- alert(imprimir);*/
