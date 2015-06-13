@@ -10,8 +10,7 @@ function cargarElementosPrincipales(){
 	var objetos = parser.dameObjetos(ordenActual);
 	mostrando=objetos;
 	mostrarGoUp(false,false);
-	var divValor = document.getElementById('divValor');
-	divValor.style.visibility='hidden';
+	mostrarDivNuevoYborrado(false);
 	var directorios = dameDivLimpio();
 	objetos.forEach(function(objeto, i) {
 			actualizarVista("box file",objeto,objeto.name,directorios,true,objetos,null);
@@ -57,24 +56,32 @@ function actualizarVista(clase,objeto,texto,directorios,chequeo,anterior,propied
 			}else{
 				divisor.onclick = function() {
 						var campoAcambiar = document.getElementById('campoAcambiar');
+						var campoAborrar = document.getElementById('campoAborrar');
 						var palabras = campoAcambiar.innerHTML.split(" ");
 						var actual = palabras[palabras.length-1];
 						//var estaVisible = (divValor.style.visibility == "visible");
 						if(mostrandoNuevoCampo){
-							if(actual==propiedad) mostrarDivNuevo(false);
+							if(actual==propiedad) mostrarDivNuevoYborrado(false);
 						} 
-						else mostrarDivNuevo(true);
+						else mostrarDivNuevoYborrado(true);
 						campoAcambiar.innerHTML = "Nuevo valor para el campo "+propiedad;
+						campoAborrar.innerHTML = "Eliminar "+propiedad;
 
 						var actualizar = document.getElementById('actualizar');
 						var valor = document.getElementById('valor');
 						valor.value="";
 						actualizar.onclick = function() {
 							parser.actualizar(anterior,propiedad,valor.value);
-							mostrarDivNuevo(false);
+							mostrarDivNuevoYborrado(false);
 							cargarPropiedades(anterior,true,ordenActual);
 						}
-
+						campoAborrar.onclick = function() {
+							if (confirm("Esta seguro de eliminar "+propiedad+" del objeto?") == true) {
+						        parser.eliminarPropiedad(anterior,propiedad);
+								mostrarDivNuevoYborrado(false);
+								cargarPropiedades(anterior,true,ordenActual);
+						    }
+						}
 						cargarPropiedades(objeto,chequeo,ordenActual);
 				}
 			}
@@ -97,14 +104,17 @@ function cargarAlterarOrden(){
 	}
 }
 
-function mostrarDivNuevo(cond){
+function mostrarDivNuevoYborrado(cond){
 	var divValor = document.getElementById('divValor');
+	var divBorrado = document.getElementById('divBorrado');
 	if(cond){
 		mostrandoNuevoCampo=true;
 		divValor.style.visibility='visible';
+		divBorrado.style.visibility='visible';
 	}else{
 		mostrandoNuevoCampo=false;
 		divValor.style.visibility='hidden';
+		divBorrado.style.visibility='hidden';
 	}
 }
 

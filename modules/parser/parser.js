@@ -55,6 +55,10 @@ var parser = (function () {
     //return objeto;
   }
 
+  eliminarPropiedadPrivate = function(objeto,propiedad){
+    delete objeto[propiedad];
+  }
+
 
   //PARTE PÚBLICA
   return {
@@ -100,6 +104,10 @@ var parser = (function () {
       return actualizarPrivate(objeto,propiedad,nuevo);
     },
   	
+    eliminarPropiedad: function(objeto,propiedad){
+      return eliminarPropiedadPrivate(objeto,propiedad);
+    },
+    
   	//Función de prueba, se muestra su invocación desde un html
   	prueba: function (){
   		alert ("Probando llamado de funciones del parser desde el html");
