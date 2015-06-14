@@ -11,7 +11,7 @@ function cargarElementosPrincipales(){
 	mostrando=objetos;
 	mostrarGoUp(false,false);
 	mostrarDivNuevoYborrado(false);
-	var directorios = dameDivLimpio();
+	var directorios = limpiarVista();
 	objetos.forEach(function(objeto, i) {
 			actualizarVista("box file",objeto,objeto.name,directorios,true,objetos,null);
 	});
@@ -22,7 +22,7 @@ function cargarPropiedades(objeto,chequeo,orden){
 	if(chequeo){
 		var subElementos = parser.dameSubElementos(objeto,ordenActual);
 		var propiedades = parser.damePropiedades(objeto,ordenActual);
-		var directorios = dameDivLimpio();		
+		var directorios = limpiarVista();		
 		//if(anterior==null) mostrarGoUp(false,false);
 		//else 
 			mostrarGoUp(true,chequeo);
@@ -71,9 +71,11 @@ function actualizarVista(clase,objeto,texto,directorios,chequeo,anterior,propied
 						var valor = document.getElementById('valor');
 						valor.value="";
 						actualizar.onclick = function() {
-							parser.actualizar(anterior,propiedad,valor.value);
-							mostrarDivNuevoYborrado(false);
-							cargarPropiedades(anterior,true,ordenActual);
+							if (confirm("Esta seguro de cambiar "+propiedad+" a "+valor.value+"?") == true) {
+								parser.actualizar(anterior,propiedad,valor.value);
+								mostrarDivNuevoYborrado(false);
+								cargarPropiedades(anterior,true,ordenActual);
+							}
 						}
 						campoAborrar.onclick = function() {
 							if (confirm("Esta seguro de eliminar "+propiedad+" del objeto?") == true) {
@@ -132,7 +134,7 @@ function mostrarGoUp(cond,chequeo){
 	} 
 }
 
-function dameDivLimpio(){
+function limpiarVista(){
 	var directorios = document.getElementById('directorios');
 	while (directorios.hasChildNodes()) {
    	 directorios.removeChild(directorios.lastChild);
