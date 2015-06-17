@@ -1,19 +1,23 @@
 
-var vuelta=new Array(); //PILA QUE CONTIENE EN EL TOPE EL PRÓXIMO ELEMENTO AL QUE IR HACIA ARRIBA NOS LLEVARÁ
-var mostrandoNuevoCampo=false;
-var ordenActual=true;
-var objetos = parser.dameObjetos(true);
-var mostrando=objetos; //PILA QUE CONTIENE EN EL TOPE EL ELEMENTO CUYAS PROPIEDADES SE ESTÁN MOSTRANDO
-var indexActual=1;
-var actual=parser.dameElemento(mostrando,indexActual); //ELEMENTO SELECCIONADO
-var tipoSeleccionado="";
 
 /**----------------------------------FUNCIONES LIMPIAS -------------------------------------------  **/
 /**-----------------------------------------------------------------------------------------------  **/
 /**-----------------------------------------------------------------------------------------------  **/
+var startUp = (function () {
+
+	//Parte Privada
+	var vuelta=new Array(); //PILA QUE CONTIENE EN EL TOPE EL PRÓXIMO ELEMENTO AL QUE IR HACIA ARRIBA NOS LLEVARÁ
+	var mostrandoNuevoCampo=false;
+	var ordenActual=true;
+	var objetos = parser.dameObjetos(true);
+	var mostrando=objetos; //PILA QUE CONTIENE EN EL TOPE EL ELEMENTO CUYAS PROPIEDADES SE ESTÁN MOSTRANDO
+	var indexActual=1;
+	var actual=parser.dameElemento(mostrando,indexActual); //ELEMENTO SELECCIONADO
+	var tipoSeleccionado="";
 
 //FUNCION QUE CARGA Y MUESTRA EN LA VISTA A LOS DIRECTORIOS PRINCIPALES DEL JSON
-function cargarElementosPrincipales(){
+
+cargarElementosPrincipalesPrivate = function(){
 	iconoHaciaArriba(); //A borrarse al agregar los gestos
 	iconoHaciaAdentro(); //A borrarse al agregar los gestos
 	iconoCargarAlterarOrden(); //A borrarse al agregar los gestos
@@ -31,31 +35,34 @@ function cargarElementosPrincipales(){
 }
 
 //FUNCION QUE ALTERA EL ORDEN EN QUE SE MUESTRAN LOS OBJETOS ACTUALES
-function alterarOrden(){
+alterarOrdenPrivate = function(){
+	despintarSeleccionado();
+	indexActual=1;
+	mostrarDivNuevo(false);
 	if(ordenActual) ordenActual=false;
 	else ordenActual=true;
-	if(vuelta.length==0) cargarElementosPrincipales();
+	if(vuelta.length==0) cargarElementosPrincipalesPrivate();
 	else{
 		actual=mostrando;
-		irHaciaAdentro();
+		irHaciaAdentroPrivate();
 	} 
 }
 
 //FUNCIÓN QUE VUELVE A MOSTRAR LOS ELEMENTOS DEL DIRECTORIO EN EL TOPE DE 'VUELTA'
-function irHaciaArriba(){
+irHaciaArribaPrivate = function(){
 	indexActual=1;
 	if(vuelta.length!=0){
 		mostrando=vuelta.pop();
 		vuelta.push(mostrando);
 		if(vuelta.length==1){
 			vuelta.pop();
-			cargarElementosPrincipales();
+			cargarElementosPrincipalesPrivate();
 			actual=parser.dameElemento(objetos,1); 
 		} 
 		else{
 			//vuelta.pop();
 			actual=mostrando;
-			irHaciaAdentro();
+			irHaciaAdentroPrivate();
 		} 
 		mostrarDivNuevo(false);
 		pintarSeleccionado();
@@ -64,7 +71,7 @@ function irHaciaArriba(){
 }
 
 //FUNCIÓN QUE MUESTRA LOS SUBELEMENTOS DEL OBJETO ACTUAL
-function irHaciaAdentro(){
+irHaciaAdentroPrivate = function(){
 	if(parser.dameTipo(actual).toLowerCase() == "object"){
 		if(vuelta.length==0) vuelta.push(mostrando);
 		else{
@@ -97,7 +104,7 @@ function irHaciaAdentro(){
 	
 }
 
-function creameIcono(clase,valor,texto,directorios,esDirectorio,actual,propiedad){
+ creameIcono= function (clase,valor,texto,directorios,esDirectorio,actual,propiedad){
 	var divisor = document.createElement('div');
 	divisor.className = clase;
 	var p = document.createElement('p');
@@ -109,7 +116,7 @@ function creameIcono(clase,valor,texto,directorios,esDirectorio,actual,propiedad
 
 
 //FUNCIÓN QUE CAMBIA EL ELEMENTO SELECCIONADO POR EL SIGUIENTE A LA DERECHA
-function irADerecha(){
+irADerechaPrivate = function(){
 	despintarSeleccionado()
 	var tamaño = parser.dameTamaño(mostrando);
 	if(indexActual<tamaño) indexActual=indexActual+1;
@@ -120,7 +127,7 @@ function irADerecha(){
 }
 
 //FUNCIÓN QUE CAMBIA EL ELEMENTO SELECCIONADO POR EL SIGUIENTE A LA IZQUIERDA
-function irAIzquierda(){
+irAIzquierdaPrivate = function(){
 	despintarSeleccionado();
 	var tamaño = parser.dameTamaño(mostrando);
 	if(indexActual>1) indexActual=indexActual-1;
@@ -132,14 +139,14 @@ function irAIzquierda(){
 
 //A TERMINAR
 //FUNCION QUE ACTUALIZA EL VALOR DEL ELEMENTO SELECCIONADO EN BASE A LO INGRESADO
-function actualizar(){
+actualizarPrivate = function(){
 	/*var valor = document.getElementById('valor');
 	parser.actualizar(anterior,propiedad,valor.value);*/
 	alert("A terminar, todavia no hecho");
 }
 
 //FUNCIÓN QUE BORRA LO QUE TIENE EL DIV PRINCIPAL Y DEVUELVE AL MISMO
-function limpiarVista(){
+limpiarVista = function(){
 	var directorios = document.getElementById('directorios');
 	while (directorios.hasChildNodes()) {
    	 directorios.removeChild(directorios.lastChild);
@@ -147,7 +154,7 @@ function limpiarVista(){
 	return directorios;
 }
 
-function mostrarDivNuevo(cond,objeto){
+mostrarDivNuevo = function(cond,objeto){
 	var divValor = document.getElementById('divValor');
 	var divActualizar = document.getElementById('divActualizar');
 	if(cond){
@@ -161,14 +168,14 @@ function mostrarDivNuevo(cond,objeto){
 	}
 }
 
-function pintarSeleccionado(){
+pintarSeleccionado = function(){
 	var mostrados = document.getElementById('directorios').childNodes;
 	var seleccionado = mostrados[indexActual-1];
 	tipoSeleccionado=seleccionado.className;
 	seleccionado.style.backgroundColor = 'gold';
 }
 
-function despintarSeleccionado(){
+despintarSeleccionado = function(){
 	var mostrados = document.getElementById('directorios').childNodes;
 	var seleccionado = mostrados[indexActual-1];
 	if(tipoSeleccionado=="box file") seleccionado.style.backgroundColor = 'purple';
@@ -182,57 +189,92 @@ function despintarSeleccionado(){
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'irHaciaArriba()'
 //Además, debería borrarse el icono de la casita.
-function iconoHaciaArriba(){
+iconoHaciaArriba = function(){
 	var elem = document.getElementById('irHaciaArriba');
 	elem.onclick = function() {
-		irHaciaArriba();
+		irHaciaArribaPrivate();
 	}
 }
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'irHaciaAdentro()'
 //Además, debería borrarse el icono de la casita.
-function iconoHaciaAdentro(){
+iconoHaciaAdentro = function(){
 	var elem = document.getElementById('irHaciaAdentro');
 	elem.onclick = function() {
-		irHaciaAdentro();
+		irHaciaAdentroPrivate();
 	}
 }
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'alterarOrden()'
 //Además, debería borrarse el icono de alterar orden
-function iconoCargarAlterarOrden(){
+iconoCargarAlterarOrden = function(){
 	var alterarOrdenDiv = document.getElementById('alterarOrden');
 	alterarOrdenDiv.onclick = function() {
-			alterarOrden();
+			alterarOrdenPrivate();
 	}
 }
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'irADerecha()'
 //Además, debería borrarse el icono de ir a la derecha
-function iconoCargarIrADerecha(){
+iconoCargarIrADerecha = function(){
 	var irADerechaDiv = document.getElementById('irADerecha');
 	irADerechaDiv.onclick = function() {
-			irADerecha();
+			irADerechaPrivate();
 	}
 }
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'irAIzquierda()'
 //Además, debería borrarse el icono de ir a la izquierda
-function iconoCargarIrAIzquierda(){
+iconoCargarIrAIzquierda = function(){
 	var irAIzquierdaDiv = document.getElementById('irAIzquierda');
 	irAIzquierdaDiv.onclick = function() {
-			irAIzquierda();
+			irAIzquierdaPrivate();
 	}
 }
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'actualizar()'
 //Además, debería borrarse el icono de actualizar
-function iconoCargarActualizar(){
+iconoCargarActualizar = function(){
 	var divActualizar = document.getElementById('divActualizar');
 	divActualizar.onclick = function() {
-			actualizar();
+			actualizarPrivate();
 	}
 }
+
+//PARTE PÚBLICA
+  return {
+
+  	cargarElementosPrincipales: function(){
+  		return cargarElementosPrincipalesPrivate();
+  	},
+
+  	alterarOrden: function(){
+  		return alterarOrdenPrivate();
+  	},
+
+  	irHaciaAdentro: function(){
+  		return irHaciaAdentroPrivate();
+  	},
+
+  	irHaciaArriba: function(){
+  		return irHaciaArribaPrivate();
+  	},
+
+  	irADerecha: function(){
+  		return irADerechaPrivate();
+  	},
+
+  	irAIzquierda: function(){
+  		return irAIzquierdaPrivate();
+  	}
+
+  };
+
+
+})();
+
+
+
 
 
 
