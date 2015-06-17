@@ -34,11 +34,20 @@ var parser = (function () {
   }
 
   dameSubElementosPrivate = function(objeto,orden){
-		var resultado = new Array();
-		for (var prop in objeto) 
-		    resultado.push(objeto[prop]);
-    if(orden) return resultado.sort();
-		else return resultado.reverse();
+    var propiedades = damePropiedadesPrivate(objeto,orden);
+    var subdirectorios = dameSubDirectoriosPrivate(objeto);
+    var resultado = new Array();
+
+    for (i = 0; i < subdirectorios.length; i++)
+      resultado.push(subdirectorios[i]);
+
+    if(orden) propiedades = propiedades.sort();
+    else propiedades = propiedades.reverse();
+		for (i = subdirectorios.length; i < propiedades.length; i++)
+        resultado.push(objeto[propiedades[i]]);
+	    
+    return resultado;
+
   }
 
   dameSubDirectoriosPrivate = function(objeto){
@@ -57,6 +66,27 @@ var parser = (function () {
 
   eliminarPropiedadPrivate = function(objeto,propiedad){
     delete objeto[propiedad];
+  }
+
+  cantPropiedades = function(objeto){
+    var resultado = 0;
+    for (var prop in objeto) 
+        resultado++;
+    return resultado;
+  }
+
+  dameTamañoPrivate = function(objeto){
+    if(objeto.length>1) return objeto.length;
+    else return cantPropiedades(objeto);
+  }
+
+  dameElementoPrivate = function(objetos,index,orden){
+    if(objetos.length>1) return objetos[index-1];
+    else{
+      var subelementos = dameSubElementosPrivate(objetos,orden);
+      for (i = 0; i < subelementos.length; i++)  
+        if(i+1==index) return subelementos[i];
+    }
   }
 
 
@@ -106,6 +136,16 @@ var parser = (function () {
   	
     eliminarPropiedad: function(objeto,propiedad){
       return eliminarPropiedadPrivate(objeto,propiedad);
+    },
+
+    //Función que devuelve el elemento número 'index' de objetos
+    dameElemento: function(objetos,index,orden){
+      return dameElementoPrivate(objetos,index,orden); 
+    },
+
+    //Función que devuelve el tamaño (cantidad de subelementos/propiedades) de un objeto
+    dameTamaño: function (objeto){
+      return dameTamañoPrivate(objeto);
     },
     
   	//Función de prueba, se muestra su invocación desde un html
