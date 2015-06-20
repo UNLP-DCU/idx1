@@ -33,7 +33,7 @@
 <div id="loading"><p id="loadingp">Loading content</p></div>
 <header id="main-header"></header>
 
-<div id="main-content">
+<div id="main-content" role="main">
         
 <section id="content">
     <section id="menue"></section> 
@@ -42,32 +42,32 @@
 
                 <div id="directorios"></div>
                 
-                <div class='box picture'>
-                    <p class='name' id="alterarOrden">Alterar orden</p>
+                <div class='box picture' tabindex="1">
+                    <p class='name' id="alterarOrden" aria-label="Menú principal">Alterar orden</p>
                 </div>
 
-                <div class='box home'>
+                <div class='box home' tabindex="2">
                     <p class='name' id="irHaciaArriba">Ir Hacia Arriba</p>
                 </div>
 
-                <div class='box home'>
+                <div class='box home' tabindex="3">
                     <p class='name' id="irHaciaAdentro">Ir Hacia Adentro</p>
                 </div>
 
-                <div class='box document'>
+                <div class='box document' tabindex="4">
                     <p class='name' id="irADerecha">Derecha</p>
                 </div>
 
-                <div class='box document'>
+                <div class='box document' tabindex="5">
                     <p class='name' id="irAIzquierda">Izquierda</p>
                 </div>
 
-                <div class='box message' id="divValor">
+                <div class='box message' id="divValor" >
                     <p class='name' id="campoAcambiar">Ingrese el nuevo valor</p>
-                    <input type="text" id="valor"></input>
+                    <input type="text" id="valor" tabindex="6"></input>
                 </div>
 
-                 <div class='box message' id="divActualizar">
+                 <div class='box message' id="divActualizar" tabindex="7">
                     <p class='name' id="actualizar">Actualizar</p>
                 </div>
                 
