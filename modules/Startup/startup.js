@@ -20,7 +20,7 @@ var startUp = (function () {
 cargarElementosPrincipalesPrivate = function(){
 	iconoHaciaArriba(); //A borrarse al agregar los gestos
 	iconoHaciaAdentro(); //A borrarse al agregar los gestos
-	iconoCargarAlterarOrden(); //A borrarse al agregar los gestos
+	//iconoCargarAlterarOrden(); //A borrarse al agregar los gestos
 	iconoCargarIrADerecha(); //A borrarse al agregar los gestos
 	iconoCargarIrAIzquierda(); //A borrarse al agregar los gestos
 	iconoCargarActualizar(); //A borrarse al agregar los gestos
@@ -207,12 +207,12 @@ iconoHaciaAdentro = function(){
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'alterarOrden()'
 //Además, debería borrarse el icono de alterar orden
-iconoCargarAlterarOrden = function(){
+/*iconoCargarAlterarOrden = function(){
 	var alterarOrdenDiv = document.getElementById('alterarOrden');
 	alterarOrdenDiv.onclick = function() {
 			alterarOrdenPrivate();
 	}
-}
+}*/
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'irADerecha()'
 //Además, debería borrarse el icono de ir a la derecha

@@ -3,11 +3,23 @@
  *
  * Este script se encarga de los eventos hapticos
  * manejados con la libreria Hammer */
+//Obtener los archivos
+//var archivos =  document.querySelectorAll("archivos"); 
 
-//obtiene el div main-content
+//Obtener los directorios
+//var directorios =  document.querySelectorAll("directorios");
+
+//Obtener el div que contiene todo
 var dvContent = document.getElementById('main-content');
 
-// crea una instancia hammer
+
+//crea una instancia hammer para los archivos
+//var ma = new Hammer(archivos);
+
+//crea una instancia hammer para los directorios
+//var md = new Hammer(directorios);
+
+// crea una instancia hammer para el contenedor
 var mc = new Hammer(dvContent);
 
 // Configurar reconocedores...
@@ -15,15 +27,24 @@ mc.add( new Hammer.Pan({ threshold: 80 }) );
 
 // Definiendo los eventos..
 /*--deslizado hacia derecha--*/
-mc.on("panright panleft", function(ev) {
+mc.on("panright", function(ev) {
   
-    console.log( ev.type + "!");
-     //metodo_cambiar();
+    console.log( "derecha!");
 });
 
 /*--deslizado hacia izquierda--*/
 mc.on("panleft", function(ev) {
     console.log("izquierda!");
-    //metodo_cambiar();
+});
+
+// Evento press
+mc.on("press", function(ev) {
+    console.log("press!");
+    startUp.alterarOrden();
+    
+});
+//Evento pellizcar cambia el orden de los elementos
+mc.on("pinch", function(ev) {
+    console.log("pellizcar");
 });
 
