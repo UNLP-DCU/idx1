@@ -18,11 +18,11 @@ var startUp = (function () {
 //FUNCION QUE CARGA Y MUESTRA EN LA VISTA A LOS DIRECTORIOS PRINCIPALES DEL JSON
 
 cargarElementosPrincipalesPrivate = function(){
-	iconoHaciaArriba(); //A borrarse al agregar los gestos
-	iconoHaciaAdentro(); //A borrarse al agregar los gestos
+	//iconoHaciaArriba(); //A borrarse al agregar los gestos
+	//iconoHaciaAdentro(); //A borrarse al agregar los gestos
 	//iconoCargarAlterarOrden(); //A borrarse al agregar los gestos
-	iconoCargarIrADerecha(); //A borrarse al agregar los gestos
-	iconoCargarIrAIzquierda(); //A borrarse al agregar los gestos
+	//iconoCargarIrADerecha(); //A borrarse al agregar los gestos
+	//iconoCargarIrAIzquierda(); //A borrarse al agregar los gestos
 	iconoCargarActualizar(); //A borrarse al agregar los gestos
 	mostrarDivNuevo(false);
 	objetos = parser.dameObjetos(ordenActual);
@@ -189,21 +189,21 @@ despintarSeleccionado = function(){
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'irHaciaArriba()'
 //Además, debería borrarse el icono de la casita.
-iconoHaciaArriba = function(){
+/*iconoHaciaArriba = function(){
 	var elem = document.getElementById('irHaciaArriba');
 	elem.onclick = function() {
 		irHaciaArribaPrivate();
 	}
-}
+}*/
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'irHaciaAdentro()'
 //Además, debería borrarse el icono de la casita.
-iconoHaciaAdentro = function(){
+/*iconoHaciaAdentro = function(){
 	var elem = document.getElementById('irHaciaAdentro');
 	elem.onclick = function() {
 		irHaciaAdentroPrivate();
 	}
-}
+}*/
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'alterarOrden()'
 //Además, debería borrarse el icono de alterar orden
@@ -216,21 +216,21 @@ iconoHaciaAdentro = function(){
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'irADerecha()'
 //Además, debería borrarse el icono de ir a la derecha
-iconoCargarIrADerecha = function(){
+/*iconoCargarIrADerecha = function(){
 	var irADerechaDiv = document.getElementById('irADerecha');
 	irADerechaDiv.onclick = function() {
 			irADerechaPrivate();
 	}
-}
+}*/
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'irAIzquierda()'
 //Además, debería borrarse el icono de ir a la izquierda
-iconoCargarIrAIzquierda = function(){
+/*iconoCargarIrAIzquierda = function(){
 	var irAIzquierdaDiv = document.getElementById('irAIzquierda');
 	irAIzquierdaDiv.onclick = function() {
 			irAIzquierdaPrivate();
 	}
-}
+}*/
 
 //ESTA FUNCIÓN, AL UTILIZAR GESTOS, DEBE BORRARSE, Y SÓLO HACER QUE AL HACER DETERMINADO GESTO SE LLAME A LA FUNCIÓN 'actualizar()'
 //Además, debería borrarse el icono de actualizar

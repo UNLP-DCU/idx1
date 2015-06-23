@@ -28,23 +28,35 @@ mc.add( new Hammer.Pan({ threshold: 80 }) );
 // Definiendo los eventos..
 /*--deslizado hacia derecha--*/
 mc.on("panright", function(ev) {
-  
+  	startUp.irADerecha();
     console.log( "derecha!");
+});
+
+mc.on("panup", function(ev) {
+  	startUp.irHaciaArriba();
+    console.log( "arriba!");
+});
+
+mc.on("tap", function(ev) {
+	//Definir un evento cuando se hace un click
+    console.log( "tap!");
 });
 
 /*--deslizado hacia izquierda--*/
 mc.on("panleft", function(ev) {
+	startUp.irAIzquierda();
     console.log("izquierda!");
 });
 
 // Evento press
 mc.on("press", function(ev) {
     console.log("press!");
-    startUp.alterarOrden();
+    startUp.irHaciaAdentro();
     
 });
 //Evento pellizcar cambia el orden de los elementos
 mc.on("pinch", function(ev) {
     console.log("pellizcar");
+    startUp.alterarOrden();
 });
 
