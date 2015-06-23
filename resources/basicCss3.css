@@ -93,3 +93,41 @@ h1 {
 	background-color:#585D63;
 	
 }
+
+:focus {
+ 	-webkit-box-shadow: -2px 0px 5px 9px rgba(206,224,199,1);
+	-moz-box-shadow: -2px 0px 5px 9px rgba(206,224,199,1);
+	box-shadow: -2px 0px 5px 9px rgba(206,224,199,1);
+}
+#menu{
+	/*position: relative;*/
+	font-family: verdana;
+	font-size: .9em;
+	width: 100%;
+	padding: 0;
+	float: left;
+	margin: 0 15px 5px 0;
+}
+
+#menu li {
+        display: inline;
+        margin:5px; /* Separar los botones */
+        /*background-color:#E4E4E4;*/ /* Color de fondo */
+        font-weight: bold;
+  		color: #FFFFFF;
+  		background-color: #98bf21;
+  		text-align: center;
+  		padding: 5px;/*Separar el texto*/
+  		text-decoration: none;
+}
+#menu li:hover {
+        background-color:#CCCCCC; /* Color de fondo sobre el boton */
+        cursor: pointer; /* cambiar el aspecto del puntero */
+}
+
+/* ocultar el menu en moviles */
+@media (max-width: 1000px) and (min-width: 50px) {
+	nav {
+	display: none !important;
+	}
+}

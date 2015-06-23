@@ -3,27 +3,60 @@
  *
  * Este script se encarga de los eventos hapticos
  * manejados con la libreria Hammer */
+//Obtener los archivos
+//var archivos =  document.querySelectorAll("archivos"); 
 
-var myElement = document.getElementById('main-content');
+//Obtener los directorios
+//var directorios =  document.querySelectorAll("directorios");
 
-// crea una instancia hammer
-var mc = new Hammer(myElement);
+//Obtener el div que contiene todo
+var dvContent = document.getElementById('main-content');
+
+
+//crea una instancia hammer para los archivos
+//var ma = new Hammer(archivos);
+
+//crea una instancia hammer para los directorios
+//var md = new Hammer(directorios);
+
+// crea una instancia hammer para el contenedor
+var mc = new Hammer(dvContent);
 
 // Configurar reconocedores...
 mc.add( new Hammer.Pan({ threshold: 80 }) );
 
 // Definiendo los eventos..
 /*--deslizado hacia derecha--*/
-mc.on("panright panleft", function(ev) {
-    //myElement.textContent = ev.type +" >>>>>>>>>>";
-    console.log( ev.type + "!");
-     //metodo_cambiar();
+mc.on("panright", function(ev) {
+  	startUp.irADerecha();
+    console.log( "derecha!");
+});
+
+mc.on("panup", function(ev) {
+  	startUp.irHaciaArriba();
+    console.log( "arriba!");
+});
+
+mc.on("tap", function(ev) {
+	//Definir un evento cuando se hace un click
+    console.log( "tap!");
 });
 
 /*--deslizado hacia izquierda--*/
-/*mc.on("panleft", function(ev) {
-    //myElement.textContent = ev.type +" <<<<<<<<<<<";
+mc.on("panleft", function(ev) {
+	startUp.irAIzquierda();
     console.log("izquierda!");
-    //metodo_cambiar();
-});*/
+});
+
+// Evento press
+mc.on("press", function(ev) {
+    console.log("press!");
+    startUp.irHaciaAdentro();
+    
+});
+//Evento pellizcar cambia el orden de los elementos
+mc.on("pinch", function(ev) {
+    console.log("pellizcar");
+    startUp.alterarOrden();
+});
 
