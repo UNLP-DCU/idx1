@@ -3,7 +3,7 @@
 /**----------------------------------FUNCIONES LIMPIAS -------------------------------------------  **/
 /**-----------------------------------------------------------------------------------------------  **/
 /**-----------------------------------------------------------------------------------------------  **/
-var startUp = (function () {
+var startUp = (function (parser) {
 
 	//Parte Privada
 	var vuelta=new Array(); //PILA QUE CONTIENE EN EL TOPE EL PRÓXIMO ELEMENTO AL QUE IR HACIA ARRIBA NOS LLEVARÁ
@@ -271,7 +271,7 @@ iconoCargarActualizar = function(){
   };
 
 
-})();
+})(parser);
 
 
 
