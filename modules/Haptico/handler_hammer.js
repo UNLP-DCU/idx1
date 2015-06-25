@@ -11,7 +11,7 @@
 
 //Obtener el div que contiene todo
 var dvContent = document.getElementById('main-content');
-
+var tap_route = tapRouter();
 
 //crea una instancia hammer para los archivos
 //var ma = new Hammer(archivos);
@@ -39,7 +39,9 @@ mc.on("panup", function(ev) {
 
 mc.on("tap", function(ev) {
 	//Definir un evento cuando se hace un click
+    //tapRouter.tapThis(ev.target);
     console.log( "tap!");
+    console.log(ev.target);
 });
 
 /*--deslizado hacia izquierda--*/
