@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Doquis</title>
+    <link rel="stylesheet" href="resources/basicCss3.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="resources/domready.js" type="application/javascript"></script>
+    <script src="modules/Parser/parser.js" type="application/javascript"></script>
+    <script src="modules/Startup/startup.js" type="application/javascript"></script>
+    <script>
+
+        function decreace(){
+            document.getElementById("loading").style.opacity = 
+            document.getElementById("loading").style.opacity -0.03 ;
+            if (document.getElementById("loading").style.opacity < 0){
+                clearTimeout(tim);
+                document.getElementById("loading").style.display= "none";
+            }
+
+        }
+
+        DomReady.ready(function(){
+            setTimeout(function(){},1000);
+            document.getElementById("loading").style.opacity = 1;
+            document.getElementById("loadingp").style.display ="none";
+            tim = window.setInterval(function(){decreace();}, 50);
+        });
+
+
+    </script>
+    </head>
+
+<body>
+<div id="loading"><p id="loadingp">Loading content</p></div>
+<header id="main-header"></header>
+
+<div id="main-content" role="main">
+        
+<section id="content">
+    <section id="menue"></section> 
+
+    <section id="files">
+               
+                <div id="directorios">
+                    <div class='box home'>
+                        <p class='name2'>Go 1up</p>
+                    </div>
+                    <div class='box home'>
+                        <p class='name3'>Go 2up</p>
+                    </div>
+                    <div class='box home'>
+                        <p class='name4'>Go 3up</p>
+                    </div>
+                    <div class='box home'>
+                        <p class='name5'>Go 4up</p>
+                    </div>
+                </div>
+                
+                
+
+
+    </section>
+</section>
+
+</div>
+<script src="modules/Startup/cargaStartup.js" type="application/javascript"></script>
+<script src="modules/Haptico/hammer.min.js"></script>
+<script src="modules/Haptico/handler_hammer.js"></script>
+
+        
+<footer></footer>
+
+</body>
+
+</html>
