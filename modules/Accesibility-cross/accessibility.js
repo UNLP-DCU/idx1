@@ -5,6 +5,14 @@
  * utilizando tab-index y los eventos del teclado (tab-enter) 
 */
 
+//Se define una funcion que agrega tabindex a los directorios
+function agregarTabDirectorios() {
+     $('#directorios').children('.box').attr('tabindex',1);
+};
+
+
+
+
 //Se define una funcion para el evento de presionar tecla enter
 (function ($) {
      $.prototype.enterPressed = function (fn) {
@@ -19,37 +27,47 @@
 
 //Se define los eventos para cada uno de las opciones
 $("#alterarOrden").enterPressed(function() {
-     //alterarOrden(); llamar al una funcion javascript(?)
-     console.log( "alterar Orden");
-     startUp.alterarOrden();
+    //alterarOrden(); llamar al una funcion javascript(?)
+    startUp.alterarOrden();
+    console.log( "alterar Orden");
+    agregarTabDirectorios();
 });
 
 $("#irHaciaArriba").enterPressed(function() {
-    console.log( "arriba");
-     startUp.irHaciaArriba();
+    startUp.irHaciaArriba();
+    console.log( "-alterar Orden");
+    agregarTabDirectorios();
+    
 });
 
 $("#irHaciaAbajo").enterPressed(function() {
-    console.log( "abajo");
     startUp.irHaciaAdentro();
+    console.log( "-abajo");
+    agregarTabDirectorios();
 });
 
 $("#izquierda").enterPressed(function() {
-    console.log( "izuqierda");
     startUp.irAIzquierda();
+    console.log( "-izuqierda");
+    agregarTabDirectorios();
 });
 
 $("#derecha").enterPressed(function() {
-    console.log( "derecha");
     startUp.irADerecha();
+    console.log( "-derecha");
+    agregarTabDirectorios();
 });
 
 $("#actualizar").enterPressed(function() {
-     console.log( "actualizar");
      startUp.cargarElementosPrincipales();
+     console.log( "-actualizar");
+     agregarTadDirectorios();
 });
 
 /* Agregando tab-index a los archivos obtenidos*/
 $( document ).ready(function() {
-  $('#directorios').children('.box').attr('tabindex',1);
+   agregarTadDirectorios();
 });
+
+
+    
