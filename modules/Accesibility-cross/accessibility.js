@@ -19,34 +19,28 @@
 
 //Se define los eventos para cada uno de las opciones
 $("#alterarOrden").enterPressed(function() {
-    //alterarOrden(); llamar al una funcion javascript(?)
-    console.log( "alterar Orden");
-    startUp.alterarOrden();
+     //alterarOrden(); llamar al una funcion javascript(?)
+     console.log( "alterar Orden");
 });
 
 $("#irHaciaArriba").enterPressed(function() {
     console.log( "arriba");
-    startUp.irHaciaArriba();
 });
 
 $("#irHaciaAbajo").enterPressed(function() {
     console.log( "abajo");
-    startUp.irHaciaAdentro();
 });
 
 $("#izquierda").enterPressed(function() {
     console.log( "izuqierda");
-    startUp.irAIzquierda();
 });
 
 $("#derecha").enterPressed(function() {
     console.log( "derecha");
-    startUp.irADerecha();
 });
 
 $("#actualizar").enterPressed(function() {
      console.log( "actualizar");
-     startUp.cargarElementosPrincipales();
 });
 
 /* Agregando tab-index a los archivos obtenidos*/
