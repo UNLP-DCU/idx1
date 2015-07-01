@@ -112,10 +112,9 @@ h1 {
 #menu li {
         display: inline;
         margin:5px; /* Separar los botones */
-        /*background-color:#E4E4E4;*/ /* Color de fondo */
         font-weight: bold;
   		color: #FFFFFF;
-  		background-color: #98bf21;
+  		background-color: #98bf21;/* Color de fondo */
   		text-align: center;
   		padding: 5px;/*Separar el texto*/
   		text-decoration: none;
@@ -125,9 +124,15 @@ h1 {
         cursor: pointer; /* cambiar el aspecto del puntero */
 }
 
+#msg{
+	float: right;
+	padding-right:4%;
+	background-color:transparent !important;
+}
 /* ocultar el menu en moviles */
 @media (max-width: 1000px) and (min-width: 50px) {
 	nav {
 	display: none !important;
 	}
 }
+
