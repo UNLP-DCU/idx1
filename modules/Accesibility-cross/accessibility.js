@@ -12,7 +12,9 @@ function agregarTabDirectorios() {
 
 //Setea el mensaje del estado de los cambios realizados
 function setMsg(description) {  
-	$('#msg').html("<span>"+description+"</span>");
+      // $("#status").attr("aria-relevant","text");
+       //$("#status").attr("role","status");
+       $("#status").text(description);
 };
 
 //Se define una funcion para el evento de presionar tecla enter
