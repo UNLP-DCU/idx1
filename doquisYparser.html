@@ -29,91 +29,89 @@
     </script>
     </head>
 
-<body>
-<div id="loading"><p id="loadingp">Loading content</p></div>
-<header id="main-header"></header>
+    <body>
+        <div id="loading"><p id="loadingp">Loading content</p></div>
+        <header id="main-header"></header>
 
-<div id="main-content" role="main">
-        
-<section id="content">
-    <section id="menue"></section> 
+        <div id="main-content" role="main">
+                
+            <section id="content">
+                <section id="menue"></section> 
 
-    <section id="files">
-                <!-- Menu accesible, sólo se muestra en modo desktop -->
-                <nav role="navigation" aria-label="Menu Opciones" tabindex="-1">
-                    <ul id="menu">
-                        <li tabindex="0" role="menuitem" id="alterarOrden">
-                            <b>Alterar Orden</b>
-                        </li>
-                        <li tabindex="0" role="menuitem" id="irHaciaArriba">
-                            <b>Ir hacia arriba</b>
-                        </li>
-                        <li tabindex="0" role="menuitem" id="irHaciaAbajo">
-                            <b>Ir hacia abajo</b>
-                        </li>
-                        <li tabindex="0" role="menuitem" id="derecha">
-                            <b>Derecha</b>
-                        </li>
-                        <li tabindex="0" role="menuitem" id="izquierda">
-                            <b>Izquierda</b>
-                        </li>
-                        <li tabindex="0" role="menuitem" id="actualizar">
-                            <b>Actualizar</b>
-                        </li>
-                        <li id="msg"><p id="status" tabindex="-1" role="status" aria-live="polite"></p>
+                <section id="files">
+                            <!-- Menu accesible, sólo se muestra en modo desktop -->
+                            <nav role="navigation" aria-label="Menu Opciones" tabindex="-1">
+                                <ul id="menu">
+                                    <li tabindex="0" role="menuitem" id="alterarOrden">
+                                        <b>Alterar Orden</b>
+                                    </li>
+                                    <li tabindex="0" role="menuitem" id="irHaciaArriba">
+                                        <b>Ir hacia arriba</b>
+                                    </li>
+                                    <li tabindex="0" role="menuitem" id="irHaciaAbajo">
+                                        <b>Ir hacia abajo</b>
+                                    </li>
+                                    <li tabindex="0" role="menuitem" id="derecha">
+                                        <b>Derecha</b>
+                                    </li>
+                                    <li tabindex="0" role="menuitem" id="izquierda">
+                                        <b>Izquierda</b>
+                                    </li>
+                                    <li tabindex="0" role="menuitem" id="actualizar">
+                                        <b>Actualizar</b>
+                                    </li>
+                                    <li id="msg"><p id="status" tabindex="-1" role="status" aria-live="polite"></p>
+                                        
+                                    </li>
+                                </ul>
+                            </nav><!-- endmenu -->
                             
-                        </li>
-                    </ul>
-                </nav><!-- endmenu -->
+                            <div id="directorios" aria-live="polite"></div>
+                            
+                            <div class='box picture' tabindex="1">
+                                <p class='name' id="alterarOrden" aria-label="Menú principal">Alterar orden</p>
+                            </div>
+
+                            <div class='box home' tabindex="2">
+                                <p class='name' id="irHaciaArriba">Ir Hacia Arriba</p>
+                            </div>
+
+                            <div class='box home' tabindex="3">
+                                <p class='name' id="irHaciaAdentro">Ir Hacia Adentro</p>
+                            </div>
+
+                            <div class='box document' tabindex="4">
+                                <p class='name' id="irADerecha">Derecha</p>
+                            </div>
+
+                            <div class='box document' tabindex="5">
+                                <p class='name' id="irAIzquierda">Izquierda</p>
+                            </div>
+
+                            <div class='box message' id="divValor" >
+                                <p class='name' id="campoAcambiar">Ingrese el nuevo valor</p>
+                                <input type="text" id="valor" tabindex="6"></input>
+                            </div>
+
+                             <div class='box message' id="divActualizar" tabindex="7">
+                                <p class='name' id="actualizar">Actualizar</p>
+                            </div>
+                            
+
+
+                </section>
+            </section>
+
+        </div>
+
+
+        <!-- scripts -->
+        <script src="modules/Startup/cargaStartup.js" type="application/javascript"></script>
+        <script src="modules/Haptico/hammer.min.js"></script>
+        <script src="modules/Haptico/handler_hammer.js"></script>
+        <script src="modules/Accesibility-cross/accessibility.js"></script>
+
                 
-                <div id="directorios" aria-live="polite"></div>
-                
-                <div class='box picture' tabindex="1">
-                    <p class='name' id="alterarOrden" aria-label="Menú principal">Alterar orden</p>
-                </div>
-
-                <div class='box home' tabindex="2">
-                    <p class='name' id="irHaciaArriba">Ir Hacia Arriba</p>
-                </div>
-
-                <div class='box home' tabindex="3">
-                    <p class='name' id="irHaciaAdentro">Ir Hacia Adentro</p>
-                </div>
-
-                <div class='box document' tabindex="4">
-                    <p class='name' id="irADerecha">Derecha</p>
-                </div>
-
-                <div class='box document' tabindex="5">
-                    <p class='name' id="irAIzquierda">Izquierda</p>
-                </div>
-
-                <div class='box message' id="divValor" >
-                    <p class='name' id="campoAcambiar">Ingrese el nuevo valor</p>
-                    <input type="text" id="valor" tabindex="6"></input>
-                </div>
-
-                 <div class='box message' id="divActualizar" tabindex="7">
-                    <p class='name' id="actualizar">Actualizar</p>
-                </div>
-                
-
-
-    </section>
-</section>
-
-</div>
-
-
-<!-- scripts -->
-<script src="modules/Startup/cargaStartup.js" type="application/javascript"></script>
-<script src="modules/Haptico/hammer.min.js"></script>
-<script src="modules/Haptico/handler_hammer.js"></script>
-<script src="modules/Accesibility-cross/accessibility.js"></script>
-
-        
-<footer></footer>
-
-</body>
-
+        <footer></footer>
+    </body>
 </html>

@@ -3,6 +3,7 @@
  *
  * Este script se encarga de los eventos hapticos
  * manejados con la libreria Hammer */
+
 //Obtener los archivos
 //var archivos =  document.querySelectorAll("archivos"); 
 
@@ -23,7 +24,7 @@ var dvContent = document.getElementById('main-content');
 var mc = new Hammer(dvContent);
 
 // Configurar reconocedores...
-mc.add( new Hammer.Pan({ threshold: 80 }) );
+mc.add( new Hammer.Pan({ threshold: 400 }) );
 
 // Definiendo los eventos..
 /*--deslizado hacia derecha--*/
