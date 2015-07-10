@@ -24,7 +24,7 @@ var dvContent = document.getElementById('main-content');
 var mc = new Hammer(dvContent);
 
 // Configurar reconocedores...
-mc.add( new Hammer.Pan({ threshold: 400 }) );
+mc.add( new Hammer.Pan({ threshold: 500 }) );
 
 // Definiendo los eventos..
 /*--deslizado hacia derecha--*/
@@ -60,4 +60,22 @@ mc.on("pinch", function(ev) {
     console.log("pellizcar");
     startUp.alterarOrden();
 });
+//Cambiar los pan por swipe solo hay que comentar los eventos pan y sacarle los comentarios a la siguiente seccion de codigo
+/*
+mc.on("swipeleft", function(ev) {
+        startUp.irAIzquierda();   
+    });
+
+mc.on("swiperight", function(ev) {
+        startUp.irADerecha();  
+    });
+
+
+//Sobre este no encontré mucha informacion pero creo que existe
+mc.on("swipeup", function(ev) {
+        startUp.irHaciaArriba();  
+    });
+
+
+*/
 
