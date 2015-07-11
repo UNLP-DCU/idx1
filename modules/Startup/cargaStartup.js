@@ -1,4 +1,5 @@
-(function (startUp) {
+(function (startUp, aerogestual) {
 	console.info( ">>> Iniciando app: idx1" );
 	startUp.cargarElementosPrincipales();
-}(startUp))
+        aerogestual.comenzar(startUp.alterarOrden, this, "");
+}(startUp, aerogestual))
