@@ -26,17 +26,19 @@ var mc = new Hammer(dvContent);
 // Configurar reconocedores...
 mc.add( new Hammer.Pan({ threshold: 500 }) );
 
+mc.add( new Hammer.Swipe({ direction: Hammer.DIRECTION_ALL }) );
+
 // Definiendo los eventos..
 /*--deslizado hacia derecha--*/
-mc.on("panright", function(ev) {
+/*mc.on("panright", function(ev) {
   	startUp.irADerecha();
     console.log( "derecha!");
-});
+});*/
 
-mc.on("panup", function(ev) {
+/*mc.on("panup", function(ev) {
   	startUp.irHaciaArriba();
     console.log( "arriba!");
-});
+});*/
 
 mc.on("tap", function(ev) {
 	//Definir un evento cuando se hace un click
@@ -44,10 +46,10 @@ mc.on("tap", function(ev) {
 });
 
 /*--deslizado hacia izquierda--*/
-mc.on("panleft", function(ev) {
+/*mc.on("panleft", function(ev) {
 	startUp.irAIzquierda();
     console.log("izquierda!");
-});
+});*/
 
 // Evento press
 mc.on("press", function(ev) {
@@ -56,12 +58,12 @@ mc.on("press", function(ev) {
     
 });
 //Evento pellizcar cambia el orden de los elementos
-mc.on("pinch", function(ev) {
+/*mc.on("pinch", function(ev) {
     console.log("pellizcar");
     startUp.alterarOrden();
-});
+});*/
 //Cambiar los pan por swipe solo hay que comentar los eventos pan y sacarle los comentarios a la siguiente seccion de codigo
-/*
+
 mc.on("swipeleft", function(ev) {
         startUp.irAIzquierda();   
     });
@@ -70,12 +72,11 @@ mc.on("swiperight", function(ev) {
         startUp.irADerecha();  
     });
 
-
 //Sobre este no encontré mucha informacion pero creo que existe
 mc.on("swipeup", function(ev) {
-        startUp.irHaciaArriba();  
-    });
+        startUp.irHaciaArriba();
+});
 
 
-*/
+
 
